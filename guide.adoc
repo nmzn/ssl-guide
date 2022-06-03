@@ -34,18 +34,18 @@ Step 3 - update the server:
 
 - Connect to your new reverse proxy server.
 
-´´´
-apt-get update
-´´´´
+
+		apt-get update
+
 
 
 Step 4 - install apach2:
 
-code:apt-get install apache2 -y
+		apt-get install apache2 -y
 
 Step 5 - enable needed modules:
 
-code: 	a2enmod proxy
+		a2enmod proxy
 		a2enmod proxy_http
 		a2enmod proxy_ajp
 		a2enmod rewrite
@@ -80,13 +80,13 @@ code: service apache2 restart
 
 Step 8 - install Certbot:
 
-apt-get install python-certbot-apache
+		apt-get install python-certbot-apache
 
 Step 9 - create the certificates:
 
 This Step is pretty straight forward. just type:
 
-code: certbot
+		certbot
 
 into the console and it will ask you what certificates you want to create. select the domains from the list with typing "1,2,3" for example (depends on the number shown for your domain)
 
