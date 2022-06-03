@@ -1,4 +1,4 @@
-### Lets Enrypt Certificates with pli Nodes
+# Lets Enrypt Certificates with pli Nodes
 
 Whats better than having a self-signed SSL Certificate? Right! A free Let`s encrypt Certificate!
 This guide will show you how its done, not matter if you´re running the plugin script or docker version of your node.
@@ -8,11 +8,11 @@ Also the current rewards of the plugin nodes should cover these expenses. (at le
 
 Lets start.
 
-# Step 1:
+### Step 1:
 
 Rent another VPS of your choice. The specs dont need to massive. basically the smallest one you can get will do the job.
 
-# Step 2:
+### Step 2:
 
 Buy a domain. Go to the hosting service of your choice and buy a domain you would like to use. Normally, the hosting service you got your nodes from should offer this service as well.
 
@@ -30,7 +30,7 @@ In this guide i´ll show you how to do it with an apache2 server. You could do t
 
 ####
 
-Step 3 - update the server:
+### Step 3 - update the server:
 
 - Connect to your new reverse proxy server.
 
@@ -39,11 +39,11 @@ Step 3 - update the server:
 
 
 
-Step 4 - install apach2:
+### Step 4 - install apach2:
 
 		apt-get install apache2 -y
 
-Step 5 - enable needed modules:
+### Step 5 - enable needed modules:
 
 		a2enmod proxy
 		a2enmod proxy_http
@@ -56,9 +56,9 @@ Step 5 - enable needed modules:
 		a2enmod proxy_html
 		service apache2 restart
 		
-Step 6 - create config for the node (you need to repeat this step for every node)
+### Step 6 - create config for the node (you need to repeat this step for every node)
 
-code:	nano /etc/apache2/sites-enabled/YOURNODENAME.conf  (YOURNODENAME can be the subdomain you created)
+		nano /etc/apache2/sites-enabled/YOURNODENAME.conf  (YOURNODENAME can be the subdomain you created)
 
 		<VirtualHost *:80>
 			 ServerName YOURSUBDOMAIN.yourdomain.com
@@ -69,20 +69,20 @@ code:	nano /etc/apache2/sites-enabled/YOURNODENAME.conf  (YOURNODENAME can be th
 			 ProxyPassReverse / http://10.1.1.11:80/
 		</VirtualHost>
 		
-		YOURSUBDOMAIN should be the subdomain you just created. so basically node01.yourdomain.com or pli01.yourdomain.com or whatever you might have chosen.
-		the IP Adresses "10.1.1.11:80" now need to be replaced with your node-ip:6688. The ProxyPass one and the ProxyPassReverse one.
+YOURSUBDOMAIN should be the subdomain you just created. so basically node01.yourdomain.com or pli01.yourdomain.com or whatever you might have chosen.
+the IP Adresses "10.1.1.11:80" now need to be replaced with your node-ip:6688. The ProxyPass one and the ProxyPassReverse one.
 		
 save and close the conf file and repeat that step for every node.
 
-Step 7 - restart the apache server:
+### Step 7 - restart the apache server:
 
-code: service apache2 restart
+		service apache2 restart
 
-Step 8 - install Certbot:
+### Step 8 - install Certbot:
 
 		apt-get install python-certbot-apache
 
-Step 9 - create the certificates:
+### Step 9 - create the certificates:
 
 This Step is pretty straight forward. just type:
 
