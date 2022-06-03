@@ -1,0 +1,98 @@
+### Lets Enrypt Certificates with pli Nodes
+
+Whats better than having a self-signed SSL Certificate? Right! A free Let`s encrypt Certificate!
+This guide will show you how its done, not matter if you´re running the plugin script or docker version of your node.
+
+Please note that this comes with extra expenses. Its not much, but its worth to be mentioned.
+Also the current rewards of the plugin nodes should cover these expenses. (at least at the moment this guide was created - june/22)
+
+Lets start.
+
+# Step 1:
+
+Rent another VPS of your choice. The specs dont need to massive. basically the smallest one you can get will do the job.
+
+# Step 2:
+
+Buy a domain. Go to the hosting service of your choice and buy a domain you would like to use. Normally, the hosting service you got your nodes from should offer this service as well.
+
+create as many subdomains you need. something like "node01.yourdomain.com" or "pli01.yourdomain.io" its totally up to you.
+
+Next thing you need to do is to create an A-Record for this subdomain. It needs to point to the IP Adress of your new Server you got from Step 1.
+(All the subdomains you now create need to point there. The IP Adresses of your nodes dont need to be exposed to the DNS Server. This gives more security since no one can look up the IP Adress of your nodes behind the Domain.
+A lookup would only show the reverse proxy adress)
+
+####
+
+Once you did the first two steps it gets technical. But dont worry. Its way easier than setting up the pli nodes ;)
+
+In this guide i´ll show you how to do it with an apache2 server. You could do this with a nginx server too.
+
+####
+
+Step 3 - update the server:
+
+- Connect to your new reverse proxy server.
+
+´´´
+apt-get update
+´´´´
+
+
+Step 4 - install apach2:
+
+code:apt-get install apache2 -y
+
+Step 5 - enable needed modules:
+
+code: 	a2enmod proxy
+		a2enmod proxy_http
+		a2enmod proxy_ajp
+		a2enmod rewrite
+		a2enmod deflate
+		a2enmod headers
+		a2enmod proxy_balancer
+		a2enmod proxy_connect
+		a2enmod proxy_html
+		service apache2 restart
+		
+Step 6 - create config for the node (you need to repeat this step for every node)
+
+code:	nano /etc/apache2/sites-enabled/YOURNODENAME.conf  (YOURNODENAME can be the subdomain you created)
+
+		<VirtualHost *:80>
+			 ServerName YOURSUBDOMAIN.yourdomain.com
+			 ProxyPreserveHost On 
+			 DocumentRoot /var/www/html
+			 ProxyPass /.well-known !
+			 ProxyPass / http://10.1.1.11:80/
+			 ProxyPassReverse / http://10.1.1.11:80/
+		</VirtualHost>
+		
+		YOURSUBDOMAIN should be the subdomain you just created. so basically node01.yourdomain.com or pli01.yourdomain.com or whatever you might have chosen.
+		the IP Adresses "10.1.1.11:80" now need to be replaced with your node-ip:6688. The ProxyPass one and the ProxyPassReverse one.
+		
+save and close the conf file and repeat that step for every node.
+
+Step 7 - restart the apache server:
+
+code: service apache2 restart
+
+Step 8 - install Certbot:
+
+apt-get install python-certbot-apache
+
+Step 9 - create the certificates:
+
+This Step is pretty straight forward. just type:
+
+code: certbot
+
+into the console and it will ask you what certificates you want to create. select the domains from the list with typing "1,2,3" for example (depends on the number shown for your domain)
+
+the second decision you need to make is whether there should be an automatic http to https redirect which i strongly recommend. so chose "2"..
+
+if the A-Records are set correctly, the certificates should be created, and thats it.
+
+Now you can access your nodes dashboard with https://node01.yourdomain.com without typing the port behind it. and its secure.
+	
