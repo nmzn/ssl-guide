@@ -96,3 +96,6 @@ if the A-Records are set correctly, the certificates should be created, and that
 
 Now you can access your nodes dashboard with https://node01.yourdomain.com without typing the port behind it. and its secure.
 	
+###NOTE:
+
+make sure that your reverse proxy can reach the internet via port 80. so better check for port 80 to be open on your firewall when you make the certificate request with certbot. normally its set like that as default. but its worth mentioning if you hardened your proxy server before doing this guide.
