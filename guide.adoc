@@ -1,4 +1,4 @@
-# Lets Enrypt Certificates with pli Nodes
+# Lets Encrypt Certificates with pli Nodes
 
 Whats better than having a self-signed SSL Certificate? Right! A free Let`s encrypt Certificate!
 This guide will show you how its done, not matter if you´re running the plugin script or docker version of your node.
