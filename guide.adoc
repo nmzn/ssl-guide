@@ -32,7 +32,7 @@ In this guide i´ll show you how to do it with an apache2 server. You could do t
 
 ### Step 3 - update the server:
 
-- Connect to your new reverse proxy server.
+Connect to your new reverse proxy server.
 
 		
 		apt-get update
