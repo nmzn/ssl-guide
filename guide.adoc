@@ -14,7 +14,7 @@ Rent another VPS of your choice. The specs dont need to massive. basically the s
 
 ### Step 2:
 
-Buy a domain. Go to the hosting service of your choice and buy a domain you would like to use. Normally, the hosting service you got your nodes from should offer this service as well.
+Buy a domain. Go to the hosting service of your choice and buy a domain you would like to use. Normally, the hosting service you got your nodes from should offer this service as well. Please check that the domain comes with multiple optional subdomains. most domains come with unlimited subdomains, but better check just to be sure.
 
 create as many subdomains you need. something like "node01.yourdomain.com" or "pli01.yourdomain.io" its totally up to you.
 
